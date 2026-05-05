@@ -19,7 +19,7 @@ const MapModule = (() => {
   }
 
   function init() {
-    if (!window.MAPBOX_TOKEN || MAPBOX_TOKEN.includes('YOUR_TOKEN')) {
+    if (typeof MAPBOX_TOKEN === 'undefined' || MAPBOX_TOKEN.includes('YOUR_TOKEN')) {
       document.getElementById('map').innerHTML =
         '<div style="display:flex;align-items:center;justify-content:center;' +
         'height:100%;background:#1a1a2e;color:#e94560;text-align:center;' +
