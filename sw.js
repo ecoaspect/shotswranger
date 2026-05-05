@@ -1,4 +1,4 @@
-const CACHE = 'shotswranger-v1';
+const CACHE = 'shotswranger-v2';
 
 const SHELL = [
   '/shotswranger/',
