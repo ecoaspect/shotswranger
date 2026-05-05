@@ -125,7 +125,9 @@ const MapModule = (() => {
     return { type: 'Feature', geometry: { type: 'LineString', coordinates: [] } };
   }
 
+  function resize() { if (map) map.resize(); }
+
   function resetFlyFlag() { hasFlownToUser = false; }
 
-  return { init, updateUserPosition, placeOriginMarker, placeLandingMarker, drawShotLine, clearShotMarkers, resetFlyFlag };
+  return { init, resize, updateUserPosition, placeOriginMarker, placeLandingMarker, drawShotLine, clearShotMarkers, resetFlyFlag };
 })();

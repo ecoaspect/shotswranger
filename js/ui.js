@@ -71,6 +71,7 @@
       document.getElementById('current-hole').textContent    = '1';
       document.getElementById('current-shot-num').textContent = '1';
       showScreen('screen-round');
+      setTimeout(() => MapModule.resize(), 50);
     });
 
     document.getElementById('btn-view-history').addEventListener('click', async () => {
