@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>ShotWranger</title>
+  <link rel="manifest" href="manifest.json">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ── Welcome Screen ─────────────────────────────────────────── -->
+  <div id="screen-welcome" class="screen active">
+    <div class="welcome-content">
+      <div class="app-logo">⛳</div>
+      <h1 class="app-title">ShotWranger</h1>
+      <p class="tagline">Track every shot. Know your game.</p>
+      <div class="form-group">
+        <label for="course-name">Course Name (optional)</label>
+        <input type="text" id="course-name" placeholder="e.g. Pebble Beach" autocomplete="off" autocorrect="off">
+      </div>
+      <button id="btn-start-round" class="btn btn-primary btn-large">Start Round</button>
+      <button id="btn-view-history" class="btn btn-secondary btn-large-outline">View History</button>
+    </div>
+  </div>
+
+  <!-- ── Round Screen ───────────────────────────────────────────── -->
+  <div id="screen-round" class="screen">
+
+    <!-- Map fills entire background -->
+    <div id="map"></div>
+
+    <!-- GPS accuracy pill -->
+    <div id="gps-indicator" class="gps-indicator">
+      <span id="gps-dot" class="gps-dot"></span>
+      <span id="gps-status">Acquiring GPS…</span>
+    </div>
+
+    <!-- Top bar: hole selector + shot counter + end round -->
+    <div class="round-header">
+      <div class="hole-control">
+        <button class="hole-arrow" id="btn-hole-prev" aria-label="Previous hole">&#8249;</button>
+        <div class="hole-display">
+          <span class="info-label">HOLE</span>
+          <span id="current-hole">1</span>
+        </div>
+        <button class="hole-arrow" id="btn-hole-next" aria-label="Next hole">&#8250;</button>
+      </div>
+      <div class="shot-counter">
+        <span class="info-label">SHOT</span>
+        <span id="current-shot-num">1</span>
+      </div>
+      <button id="btn-end-round" class="btn btn-danger btn-sm">End Round</button>
+    </div>
+
+    <!-- Context message shown while player walks to ball -->
+    <div id="shot-message" class="shot-message hidden">
+      Walk to your ball, then tap MARK LANDING
+    </div>
+
+    <!-- Bottom panel: clubs + action button -->
+    <div class="bottom-panel">
+      <div class="club-scroll-wrapper">
+        <div id="club-selector" class="club-selector"></div>
+      </div>
+      <button id="btn-shot-action" class="btn btn-action">START SHOT</button>
+    </div>
+
+    <!-- Shot confirmation card (slides up after marking landing) -->
+    <div id="shot-confirm-card" class="shot-confirm-card hidden">
+      <div class="shot-confirm-content">
+        <div id="shot-summary" class="shot-summary"></div>
+        <div class="shot-confirm-buttons">
+          <button id="btn-redo-shot" class="btn btn-secondary">Redo</button>
+          <button id="btn-confirm-shot" class="btn btn-success">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── History Screen ─────────────────────────────────────────── -->
+  <div id="screen-history" class="screen">
+    <div class="screen-header">
+      <button id="btn-history-back" class="btn btn-icon" aria-label="Back">&#8592;</button>
+      <h2>Round History</h2>
+    </div>
+    <div id="history-list" class="history-list"></div>
+  </div>
+
+  <!-- ── Analysis Screen ───────────────────────────────────────── -->
+  <div id="screen-analysis" class="screen">
+    <div class="screen-header">
+      <button id="btn-analysis-back" class="btn btn-icon" aria-label="Back">&#8592;</button>
+      <h2 id="analysis-title">Round Analysis</h2>
+      <button id="btn-export" class="btn btn-sm btn-secondary">Export</button>
+    </div>
+    <div class="analysis-content">
+      <div class="stats-grid" id="stats-grid"></div>
+      <div class="chart-section">
+        <h3>Avg Distance by Club</h3>
+        <canvas id="chart-distance"></canvas>
+      </div>
+      <div class="chart-section">
+        <h3>Shots by Hole</h3>
+        <canvas id="chart-holes"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Scripts (order matters) ───────────────────────────────── -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/clubs.js"></script>
+  <script src="js/geo.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/shots.js"></script>
+  <script src="js/analysis.js"></script>
+  <script src="js/ui.js"></script>
+
+</body>
+</html>

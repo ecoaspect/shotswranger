@@ -1,0 +1,8 @@
+# Ignore editor and OS files
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+
+# Ignore any local-only config overrides
+config.local.js
