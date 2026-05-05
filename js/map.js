@@ -41,6 +41,14 @@ const MapModule = (() => {
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
     map.addControl(new mapboxgl.NavigationControl({ showCompass: true, showZoom: false }), 'top-right');
 
+    map.on('error', e => {
+      const el = document.getElementById('map');
+      const msg = document.createElement('div');
+      msg.style.cssText = 'position:absolute;bottom:170px;left:0;right:0;background:rgba(233,69,96,0.9);color:#fff;padding:8px 12px;font-size:0.75rem;z-index:99;word-break:break-all';
+      msg.textContent = 'Map error: ' + (e.error && e.error.message ? e.error.message : JSON.stringify(e));
+      el.appendChild(msg);
+    });
+
     map.on('load', () => {
       map.addSource(LINE_SOURCE, {
         type: 'geojson',
